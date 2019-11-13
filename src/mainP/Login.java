@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -43,9 +44,10 @@ ObservableList<String> titlelist= FXCollections.observableArrayList("STUDENT","F
         Connection connection= sqliteConnection.dbConnector();
         Statement statement = connection.createStatement();
 
-        ResultSet resultSet = statement.executeQuery("select * from users where username" +
-                " = '" + u1.user + "' and password = '" + u1.pass + "'");
 
+if(title.getValue()=="STUDENT"){
+    ResultSet resultSet = statement.executeQuery("select * from users where username" +
+            " = '" + u1.user + "' and password = '" + u1.pass + "' and type = 'STUDENT'");
         if (resultSet.next()) {
             Parent root = FXMLLoader.load(getClass().getResource("../sView/homeStudent.fxml"));
             Node node = (Node) event.getSource();
@@ -53,6 +55,49 @@ ObservableList<String> titlelist= FXCollections.observableArrayList("STUDENT","F
             stage.setScene(new Scene(root));
 
         }
+        else{
+            Alert alert =new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("User Login");
+            alert.setHeaderText(null);
+            alert.setContentText("No Student With this name!");
+            alert.showAndWait();
+        }
+}
+        else if (title.getValue()=="ADMIN") {
+    ResultSet resultSet = statement.executeQuery("select * from users where username" +
+            " = '" + u1.user + "' and password = '" + u1.pass + "' and type = 'ADMIN'");
+            if(resultSet.next()) {
+                Parent root = FXMLLoader.load(getClass().getResource("../aView/homeAdmin.fxml"));
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                stage.setScene(new Scene(root));
+            }
+            else{
+                Alert alert =new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("User Login");
+                alert.setHeaderText(null);
+                alert.setContentText("No Admin With this name!");
+                alert.showAndWait();
+            }
+        }
+
+else if (title.getValue()=="FACULTY") {
+    ResultSet resultSet = statement.executeQuery("select * from users where username" +
+            " = '" + u1.user + "' and password = '" + u1.pass + "' and type = 'FACULTY'");
+    if(resultSet.next()) {
+        Parent root = FXMLLoader.load(getClass().getResource("../fView/homeFaculty.fxml"));
+        Node node = (Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        stage.setScene(new Scene(root));
+    }
+    else{
+        Alert alert =new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("User Login");
+        alert.setHeaderText(null);
+        alert.setContentText("No User With this name!");
+        alert.showAndWait();
+    }
+}
 
 
     }
