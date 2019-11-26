@@ -11,6 +11,32 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class homeview {
+
+
+
+
+    @FXML
+    void duser(MouseEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/aView/displayCourses.fxml"));
+
+        Node node = (Node) event.getSource();
+
+        Stage stage = (Stage) node.getScene().getWindow();
+
+        stage.setScene(new Scene(root));
+
+    }
+    @FXML
+    void dcourse(MouseEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/aView/displayCourses.fxml"));
+
+        Node node = (Node) event.getSource();
+
+        Stage stage = (Stage) node.getScene().getWindow();
+
+        stage.setScene(new Scene(root));
+
+    }
     @FXML
     void logout(MouseEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/mainP/login.fxml"));
