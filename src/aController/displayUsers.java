@@ -4,7 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,68 +13,64 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import mainP.Course;
+import mainP.user;
 import utilities.sqliteConnection;
 
 import java.io.IOException;
-import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ResourceBundle;
+import java.time.LocalDate;
 
-public class displayCourses {
-
-    @FXML
-    private TableView<Course> tableView;
+public class displayUsers {
 
     @FXML
-    private TableColumn<Course,Integer> idColumn;
+    private TableView<user> tableView;
 
     @FXML
-    private TableColumn<Course,String> CNameColumn;
+    private TableColumn<user,Integer> idColumn;
 
     @FXML
-    private TableColumn<Course,String> CCodeColumn;
+    private TableColumn<user,String> FNameColumn;
 
     @FXML
-    private TableColumn<Course,Integer> CHrsColumn;
+    private TableColumn<user,String> LNameColumn;
 
     @FXML
-    private TableColumn<Course,String> TAssignedColumn;
+    private TableColumn<user,String> GenderColumn;
 
     @FXML
-    private TableColumn<Course,String> PreReqColumn;
+    private TableColumn<user,String> addressColumn;
 
     @FXML
-    private TableColumn<Course,String> TypeColumn;
+    private TableColumn<user,String> typeColumn;
 
     @FXML
-    private TableColumn<Course,Integer> SemesterColumn;
+    private TableColumn<user, String> dobColumn;
 
-     @FXML
+    @FXML
     public void loadData() {
 
-        idColumn.setCellValueFactory(new PropertyValueFactory<Course,Integer>("id"));
-        CNameColumn.setCellValueFactory(new PropertyValueFactory<Course,String>("cName"));
-        CCodeColumn.setCellValueFactory(new PropertyValueFactory<Course,String>("CCode"));
-        TAssignedColumn.setCellValueFactory(new PropertyValueFactory<Course,String>("ATeacher"));
-        TypeColumn.setCellValueFactory(new PropertyValueFactory<Course,String>("type"));
-        PreReqColumn.setCellValueFactory(new PropertyValueFactory<Course,String>("PreReq"));
-        CHrsColumn.setCellValueFactory(new PropertyValueFactory<Course,Integer>("cHrs"));
-        SemesterColumn.setCellValueFactory(new PropertyValueFactory<Course,Integer>("semester"));
+        idColumn.setCellValueFactory(new PropertyValueFactory<user,Integer>("id"));
+        FNameColumn.setCellValueFactory(new PropertyValueFactory<user,String>("fname"));
+        LNameColumn.setCellValueFactory(new PropertyValueFactory<user,String>("lname"));
+        GenderColumn.setCellValueFactory(new PropertyValueFactory<user,String>("gender"));
+        addressColumn.setCellValueFactory(new PropertyValueFactory<user,String>("address"));
+        typeColumn.setCellValueFactory(new PropertyValueFactory<user,String>("typee"));
+        dobColumn.setCellValueFactory(new PropertyValueFactory<user,String>("dob"));
 
-         tableView.setItems(getCourses());
+        tableView.setItems(getUsers());
     }
 
-    public ObservableList<Course> getCourses(){
-        ObservableList<Course> Course= FXCollections.observableArrayList();
+    public ObservableList<user> getUsers(){
+        ObservableList<user> user= FXCollections.observableArrayList();
         try {
             Connection connection = sqliteConnection.dbConnector();
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("select * from courses");
+            ResultSet resultSet = statement.executeQuery("select * from users");
             while (resultSet.next()) {
-                Course.add(new Course(resultSet.getInt("id"), resultSet.getString("cName"), resultSet.getString("code"), resultSet.getInt("cHrs"), resultSet.getString("aTeacher"), resultSet.getString("preReq"), resultSet.getString("type"), resultSet.getInt("semester")));
+                user.add(new user(resultSet.getInt("id"), resultSet.getString("FName"), resultSet.getString("LName"),  resultSet.getString("type"), resultSet.getString("gender"), resultSet.getString("address"), resultSet.getString("dob")));
             }
 
 
@@ -85,8 +80,11 @@ public class displayCourses {
 
 
 
-        return Course;
+        return user;
     }
+
+
+
 
     @FXML
     void setting(MouseEvent event) throws IOException {
@@ -100,9 +98,11 @@ public class displayCourses {
 
     }
 
+
+
     @FXML
     void duser(MouseEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/aView/displayUsers.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/aView/displayCourses.fxml"));
 
         Node node = (Node) event.getSource();
 
@@ -177,6 +177,5 @@ public class displayCourses {
         stage.setScene(new Scene(root));
 
     }
-
 
 }

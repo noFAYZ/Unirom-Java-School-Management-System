@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -105,7 +106,17 @@
                      </effect>
                   </ImageView>
                </children></HBox>
-                <HBox alignment="CENTER" layoutX="10.0" layoutY="324.0" prefHeight="60.0" prefWidth="80.0" style="-fx-background-color: #2D2D37;" />
+                <HBox alignment="CENTER" layoutX="10.0" layoutY="324.0" onMouseClicked="#setting" prefHeight="60.0" prefWidth="80.0" style="-fx-background-color: #2D2D37;">
+               <children>
+                  <ImageView fitHeight="18.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/Blunicons/PNG/Settings.png" />
+                     </image>
+                     <effect>
+                        <ColorAdjust brightness="1.0" />
+                     </effect>
+                  </ImageView>
+               </children></HBox>
                 <HBox alignment="CENTER" layoutX="10.0" layoutY="144.0" prefHeight="60.0" prefWidth="80.0" style="-fx-background-color: #2D2D37;" />
                 <HBox alignment="CENTER" layoutX="10.0" layoutY="444.0" onMouseClicked="#logout" prefHeight="95.0" prefWidth="80.0" style="-fx-background-color: #DD5043;">
                     <children>
@@ -170,18 +181,23 @@
             <DropShadow blurType="GAUSSIAN" />
          </effect>
         </HBox>
-      <TableView layoutX="167.0" layoutY="162.0" prefHeight="369.0" prefWidth="796.0">
+      <TableView fx:id="tableView" layoutX="159.0" layoutY="181.0" prefHeight="369.0" prefWidth="797.0">
         <columns>
-          <TableColumn id="idColumn" editable="false" prefWidth="63.0" text="ID" />
-          <TableColumn id="CNameColumn" prefWidth="162.0" text="Course Name" />
+          <TableColumn id="idColumn" fx:id="idColumn" editable="false" prefWidth="63.0" text="ID" />
+          <TableColumn id="CNameColumn" fx:id="CNameColumn" prefWidth="162.0" text="Course Name" />
             <TableColumn minWidth="0.0" prefWidth="0.0" text="Last Name" />
-            <TableColumn id="CCodeColumn" prefWidth="92.0" text="Course Code" />
-            <TableColumn id="CHrsColumn" minWidth="0.0" prefWidth="99.0" text="Credit Hrs" />
-            <TableColumn id="TAssignedColumn" prefWidth="138.0" text="Teacher Assigned" />
-            <TableColumn id="PreReqColumn" prefWidth="72.0" text="PreReq" />
-            <TableColumn id="TypeColumn" prefWidth="71.0" text="Type" />
-            <TableColumn id="SemesterColumn" prefWidth="98.0" text="Semester" />
+            <TableColumn id="CCodeColumn" fx:id="CCodeColumn" prefWidth="92.0" text="Course Code" />
+            <TableColumn id="CHrsColumn" fx:id="CHrsColumn" minWidth="0.0" prefWidth="99.0" text="Credit Hrs" />
+            <TableColumn id="TAssignedColumn" fx:id="TAssignedColumn" prefWidth="138.0" text="Teacher Assigned" />
+            <TableColumn id="PreReqColumn" fx:id="PreReqColumn" prefWidth="72.0" text="PreReq" />
+            <TableColumn id="TypeColumn" fx:id="TypeColumn" prefWidth="71.0" text="Type" />
+            <TableColumn id="SemesterColumn" fx:id="SemesterColumn" prefWidth="98.0" text="Semester" />
         </columns>
       </TableView>
+      <Button layoutX="159.0" layoutY="123.0" mnemonicParsing="false" onMouseClicked="#loadData" prefHeight="38.0" prefWidth="110.0" text="Refresh">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>

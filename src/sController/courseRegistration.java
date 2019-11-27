@@ -40,7 +40,7 @@ public class courseRegistration implements Initializable {
     private TableColumn<Course,String> CNameColumn;
 
     @FXML
-    private TableColumn<Course,Integer> preReqColumn;
+    private TableColumn<Course,String> preReqColumn;
 
     @FXML
     private TableColumn<Course,Integer> CHrsColumn;
@@ -49,7 +49,7 @@ public class courseRegistration implements Initializable {
         public void initialize(URL url,ResourceBundle rb){
             idColumn.setCellValueFactory(new PropertyValueFactory<Course,Integer>("id"));
             CNameColumn.setCellValueFactory(new PropertyValueFactory<Course,String>("cName"));
-            preReqColumn.setCellValueFactory(new PropertyValueFactory<Course,Integer>("PreReq"));
+            preReqColumn.setCellValueFactory(new PropertyValueFactory<Course,String>("PreReq"));
             CHrsColumn.setCellValueFactory(new PropertyValueFactory<Course,Integer>("cHrs"));
 
             tableView.setItems(getCourses());
@@ -62,7 +62,7 @@ public class courseRegistration implements Initializable {
                     Statement statement = connection.createStatement();
                     ResultSet resultSet = statement.executeQuery("select * from courses");
                     while (resultSet.next()) {
-                        Course.add(new Course(resultSet.getInt("id"), resultSet.getString("cName"), resultSet.getString("code"), resultSet.getInt("cHrs"), resultSet.getString("aTeacher"), resultSet.getInt("preReq"), resultSet.getString("type"), resultSet.getInt("semester")));
+                        Course.add(new Course(resultSet.getInt("id"), resultSet.getString("cName"), resultSet.getString("code"), resultSet.getInt("cHrs"), resultSet.getString("aTeacher"), resultSet.getString("preReq"), resultSet.getString("type"), resultSet.getInt("semester")));
                     }
 
 

@@ -103,7 +103,17 @@
                      </effect>
                   </ImageView>
                </children></HBox>
-            <HBox alignment="CENTER" layoutX="10.0" layoutY="324.0" prefHeight="60.0" prefWidth="80.0" style="-fx-background-color: #2D2D37;" />
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="324.0" prefHeight="60.0" prefWidth="80.0" style="-fx-background-color: #2D2D37;">
+               <children>
+                  <ImageView fitHeight="20.0" fitWidth="23.0" onMouseClicked="#setting" onMousePressed="#Courses" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/Blunicons/PNG/Settings.png" />
+                     </image>
+                     <effect>
+                        <ColorAdjust brightness="1.0" />
+                     </effect>
+                  </ImageView>
+               </children></HBox>
             <HBox alignment="CENTER" layoutX="10.0" layoutY="144.0" prefHeight="60.0" prefWidth="80.0" style="-fx-background-color: #2D2D37;" />
             <HBox alignment="CENTER" layoutX="10.0" layoutY="444.0" onMousePressed="#logout" prefHeight="95.0" prefWidth="80.0" style="-fx-background-color: #DD5043;">
                <children>
@@ -270,7 +280,7 @@
             <DropShadow blurType="TWO_PASS_BOX" />
          </effect>
       </HBox>
-      <HBox alignment="CENTER_LEFT" layoutX="438.0" layoutY="298.0" onMousePressed="#duser" prefHeight="100.0" prefWidth="240.0" style="-fx-background-color: #452153;">
+      <HBox alignment="CENTER_LEFT" layoutX="427.0" layoutY="298.0" onMousePressed="#duser" prefHeight="100.0" prefWidth="240.0" style="-fx-background-color: #452153;">
          <children>
             <HBox alignment="CENTER" prefHeight="60.0" prefWidth="80.0" style="-fx-background-color: #2D2D37;">
                <children>
@@ -285,6 +295,33 @@
                </children>
             </HBox>
             <Label text="Users" textFill="WHITE">
+               <font>
+                  <Font size="25.0" />
+               </font>
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+            </Label>
+         </children>
+         <effect>
+            <DropShadow blurType="TWO_PASS_BOX" />
+         </effect>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" layoutX="686.0" layoutY="298.0" onMouseClicked="#setting" onMousePressed="#duser" prefHeight="100.0" prefWidth="240.0" style="-fx-background-color: #452153;">
+         <children>
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="80.0" style="-fx-background-color: #2D2D37;">
+               <children>
+                  <ImageView fitHeight="26.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/Blunicons/PNG/Settings.png" />
+                     </image>
+                     <effect>
+                        <ColorAdjust brightness="1.0" />
+                     </effect>
+                  </ImageView>
+               </children>
+            </HBox>
+            <Label prefHeight="36.0" prefWidth="94.0" text="Setting" textFill="WHITE">
                <font>
                   <Font size="25.0" />
                </font>

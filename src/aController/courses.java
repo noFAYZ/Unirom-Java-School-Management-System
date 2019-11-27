@@ -61,7 +61,7 @@ public class courses {
             Alert alert =new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("User Login");
             alert.setHeaderText(null);
-            alert.setContentText("No Student With this name!");
+            alert.setContentText("Database issue :/");
             alert.showAndWait();
         }
         try {
@@ -77,7 +77,7 @@ public class courses {
             Alert alert =new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("User Login");
             alert.setHeaderText(null);
-            alert.setContentText("No Student With this name!");
+            alert.setContentText("Database Issue :/ ");
             alert.showAndWait();
         }
 
@@ -95,7 +95,7 @@ public class courses {
         prereq.setValue("CS101");
         prereq.setItems(prereqlist);
 
-        semestr.setValue("1");
+        semestr.setValue(1);
         semestr.setItems(semestrlist);
 
         typee.setValue("CORE");
@@ -108,9 +108,27 @@ public class courses {
         Connection connection= sqliteConnection.dbConnector();
         Statement statement = connection.createStatement();
         int status = statement.executeUpdate("INSERT INTO courses (cName,code,cHrs,aTeacher,preReq,type,semester) VALUES( '"+ cd_name.getText() +"','"+ cd_code.getText() +"','"+ credit.getValue() +"','"+ teachr.getValue() +"','"+ prereq.getValue() +"','"+ typee.getValue() +"','"+ semestr.getValue() +"')");
+        if(status==1){
+            Alert alert =new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Course");
+            alert.setHeaderText(null);
+            alert.setContentText("Course '"+cd_name.getText()+ "' has been Added!");
+            alert.showAndWait();
+        }
+
 
     }
+    @FXML
+    void setting(MouseEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/aView/setting.fxml"));
 
+        Node node = (Node) event.getSource();
+
+        Stage stage = (Stage) node.getScene().getWindow();
+
+        stage.setScene(new Scene(root));
+
+    }
     @FXML
     void dash(MouseEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/aView/homeAdmin.fxml"));
@@ -169,7 +187,7 @@ public class courses {
     }
     @FXML
     void duser(MouseEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/aView/displayCourses.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/aView/displayUsers.fxml"));
 
         Node node = (Node) event.getSource();
 

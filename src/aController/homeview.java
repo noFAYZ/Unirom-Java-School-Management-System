@@ -14,10 +14,20 @@ public class homeview {
 
 
 
+    @FXML
+    void setting(MouseEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/aView/setting.fxml"));
 
+        Node node = (Node) event.getSource();
+
+        Stage stage = (Stage) node.getScene().getWindow();
+
+        stage.setScene(new Scene(root));
+
+    }
     @FXML
     void duser(MouseEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/aView/displayCourses.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/aView/displayUsers.fxml"));
 
         Node node = (Node) event.getSource();
 

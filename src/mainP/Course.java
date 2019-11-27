@@ -7,23 +7,23 @@ public class Course {
 	ArrayList<Student> students;
 	ArrayList<Teacher> lecturers;
 
-	public Integer id,CHrs,preReq,semester;
-	public String CName,aTeacher,type,cCode;
+	public Integer id,CHrs,semester;
+	public String CName,ATeacher,type,CCode,preReq;
 
 	Course(){
 		students=new ArrayList<Student>();
 		lecturers=new ArrayList<Teacher>();
 	}
-	public Course( Integer id, String CName,String cCode, Integer CHrs, String aTeacher, Integer preReq, String type, Integer semester) {
+	public Course( Integer id, String CName,String CCode, Integer CHrs, String ATeachers, String preReq, String type, Integer semester) {
 
 		this.id = id;
 		this.CName = CName;
 		this.CHrs = CHrs;
-		this.aTeacher = aTeacher;
+		this.ATeacher = ATeachers;
 		this.preReq = preReq;
 		this.type = type;
 		this.semester = semester;
-		this.cCode=cCode;
+		this.CCode=CCode;
 	}
 
 
@@ -31,13 +31,6 @@ public class Course {
 		this.CName = CName;
 	}
 
-	public String getcCode() {
-		return cCode;
-	}
-
-	public void setcCode(String cCode) {
-		this.cCode = cCode;
-	}
 
 	public void addStudents(Student student){
 
@@ -107,11 +100,11 @@ public class Course {
 		this.CHrs = CHrs;
 	}
 
-	public Integer getPreReq() {
+	public String getPreReq() {
 		return preReq;
 	}
 
-	public void setPreReq(Integer preReq) {
+	public void setPreReq(String preReq) {
 		this.preReq = preReq;
 	}
 
@@ -127,16 +120,20 @@ public class Course {
 		return CName;
 	}
 
-	public void setcName(String cName) {
-		this.CName = CName;
+	public String getATeacher() {
+		return ATeacher;
 	}
 
-	public String getaTeacher() {
-		return aTeacher;
+	public void setATeacher(String aTeacher) {
+		this.ATeacher = aTeacher;
 	}
 
-	public void setaTeacher(String aTeacher) {
-		this.aTeacher = aTeacher;
+	public String getCCode() {
+		return CCode;
+	}
+
+	public void setCCode(String cCode) {
+		this.CCode = cCode;
 	}
 
 	public String getType() {

@@ -10,6 +10,9 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+
+
+
     Stage window;
     Scene scene1,scene2;
     @Override
@@ -24,4 +27,5 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+    public Integer creditFee;
 }

@@ -61,7 +61,17 @@ public class users {
 
 
     }
+    @FXML
+    void setting(MouseEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/aView/setting.fxml"));
 
+        Node node = (Node) event.getSource();
+
+        Stage stage = (Stage) node.getScene().getWindow();
+
+        stage.setScene(new Scene(root));
+
+    }
     @FXML
     void logout(MouseEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/mainP/login.fxml"));
