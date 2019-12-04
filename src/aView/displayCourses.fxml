@@ -181,7 +181,7 @@
             <DropShadow blurType="GAUSSIAN" />
          </effect>
         </HBox>
-      <TableView fx:id="tableView" layoutX="159.0" layoutY="181.0" prefHeight="369.0" prefWidth="797.0">
+      <TableView fx:id="tableView" layoutX="159.0" layoutY="190.0" prefHeight="369.0" prefWidth="795.0">
         <columns>
           <TableColumn id="idColumn" fx:id="idColumn" editable="false" prefWidth="63.0" text="ID" />
           <TableColumn id="CNameColumn" fx:id="CNameColumn" prefWidth="162.0" text="Course Name" />
@@ -195,6 +195,11 @@
         </columns>
       </TableView>
       <Button layoutX="159.0" layoutY="123.0" mnemonicParsing="false" onMouseClicked="#loadData" prefHeight="38.0" prefWidth="110.0" text="Refresh">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
+      <Button fx:id="rms" layoutX="784.0" layoutY="129.0" mnemonicParsing="false" onMouseClicked="#rmData" prefHeight="38.0" prefWidth="172.0" text="Remove Selected">
          <font>
             <Font size="17.0" />
          </font>

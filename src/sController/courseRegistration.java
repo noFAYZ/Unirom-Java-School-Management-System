@@ -7,15 +7,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import mainP.Course;
+import mainP.Student;
 import utilities.sqliteConnection;
 
 import java.awt.*;
@@ -26,7 +25,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.List;
+
+import utilities.MultiSelectTableView;
 public class courseRegistration implements Initializable {
 
 
@@ -74,6 +76,54 @@ public class courseRegistration implements Initializable {
 
             return Course;
         }
+
+
+    @FXML
+    public void registerCourse() throws SQLException {
+
+        Course selectedItem = tableView.getSelectionModel().getSelectedItem();
+        ArrayList<Integer> totalCredit=new ArrayList<>();
+        Integer sums=0;
+
+        Connection connection = sqliteConnection.dbConnector();
+        Statement statement = connection.createStatement();
+
+        ResultSet resultSets = statement.executeQuery("SELECT * FROM users INNER JOIN registration ON users.id = registration.sID");
+        while (resultSets.next()) {
+           totalCredit.add(resultSets.getInt("cHrs"));
+           sums+=resultSets.getInt("cHrs");
+        }
+if(sums<=18) {
+    Alert alerts = new Alert(Alert.AlertType.INFORMATION);
+    alerts.setTitle("Register Course");
+    alerts.setHeaderText(null);
+    alerts.setContentText("You have registered "+sums+" Credit Hours");
+    alerts.showAndWait();
+    ResultSet resultSet = statement.executeQuery("select * from registration where cID = '" + selectedItem.id + "' and sID = '" + Student.id + "'");
+
+    if (resultSet.next()) {
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Register Course");
+        alert.setHeaderText(null);
+        alert.setContentText("You have Registered this Subject already!");
+        alert.showAndWait();
+    } else {
+        int status = statement.executeUpdate("INSERT INTO registration (cID,sID) VALUES ('" + selectedItem.id + "','" + Student.id + "')");
+
+
+        if (status == 1) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Register Course");
+            alert.setHeaderText(null);
+            alert.setContentText("Course " + selectedItem.CName + " have been Registered Successfuly!");
+            alert.showAndWait();
+        }
+    }
+}
+
+    }
+
 
 
     //Event Handlers

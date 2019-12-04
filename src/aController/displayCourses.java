@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -24,7 +25,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 
-public class displayCourses {
+public class displayCourses implements Initializable{
 
     @FXML
     private TableView<Course> tableView;
@@ -52,6 +53,9 @@ public class displayCourses {
 
     @FXML
     private TableColumn<Course,Integer> SemesterColumn;
+
+
+
 
      @FXML
     public void loadData() {
@@ -87,6 +91,28 @@ public class displayCourses {
 
         return Course;
     }
+
+    @FXML
+    public void rmData() throws SQLException {
+Course selectedItem = tableView.getSelectionModel().getSelectedItem();
+        tableView.getItems().remove(selectedItem);
+
+
+        Connection connection= sqliteConnection.dbConnector();
+        Statement statement = connection.createStatement();
+
+        int status = statement.executeUpdate("DELETE FROM courses WHERE id= '"+selectedItem.id+"'");
+
+
+        if (status==1) {
+            Alert alert =new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Remove Course");
+            alert.setHeaderText(null);
+            alert.setContentText("Course "+selectedItem.CName+" have been removed Successfuly!");
+            alert.showAndWait();
+        }
+    }
+
 
     @FXML
     void setting(MouseEvent event) throws IOException {
@@ -179,4 +205,8 @@ public class displayCourses {
     }
 
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        loadData();
+    }
 }

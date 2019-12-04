@@ -4,9 +4,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -17,13 +19,15 @@ import mainP.user;
 import utilities.sqliteConnection;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.ResourceBundle;
 
-public class displayUsers {
+public class displayUsers implements Initializable {
 
     @FXML
     private TableView<user> tableView;
@@ -48,6 +52,8 @@ public class displayUsers {
 
     @FXML
     private TableColumn<user, String> dobColumn;
+
+
 
     @FXML
     public void loadData() {
@@ -83,7 +89,25 @@ public class displayUsers {
         return user;
     }
 
+    @FXML
+    public void rmData() throws SQLException {
+        user selectedItem = tableView.getSelectionModel().getSelectedItem();
+        tableView.getItems().remove(selectedItem);
 
+
+        Connection connection= sqliteConnection.dbConnector();
+        Statement statement = connection.createStatement();
+
+        int status = statement.executeUpdate("DELETE FROM users WHERE id= '"+selectedItem.getId()+"'");
+
+        if (status==1) {
+            Alert alert =new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Remove Course");
+            alert.setHeaderText(null);
+            alert.setContentText("User "+selectedItem.getFname()+" "+selectedItem.getLname()+" have been removed Successfuly!");
+            alert.showAndWait();
+        }
+    }
 
 
     @FXML
@@ -178,4 +202,8 @@ public class displayUsers {
 
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        loadData();
+    }
 }

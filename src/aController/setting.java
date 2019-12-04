@@ -5,20 +5,45 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import mainP.Main;
+import mainP.Fee;
+import utilities.sqliteConnection;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class setting {
     @FXML
     private TextField perCredit;
 
     @FXML
-    void updateCredit(){
+    void updateCredit() throws SQLException, IOException {
+        Integer fr = Integer.parseInt(perCredit.getText().trim());
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        LocalDate localDate = LocalDate.now();
 
+        Fee fee=new Fee(dtf.format(localDate),fr);
+
+        Connection connection= sqliteConnection.dbConnector();
+        Statement statement = connection.createStatement();
+
+        int status = statement.executeUpdate("INSERT INTO fee (amount,date) VALUES ( '"+ fr +"','"+ dtf.format(localDate) +"')");
+
+        if (status==1) {
+            Alert alert =new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("FEE");
+            alert.setHeaderText(null);
+            alert.setContentText("Per Credit Hour Fee Updated Succesfuly!");
+            alert.showAndWait();
+
+        }
 
     }
 

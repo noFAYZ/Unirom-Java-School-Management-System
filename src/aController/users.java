@@ -1,25 +1,27 @@
 package aController;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import utilities.sqliteConnection;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.ResourceBundle;
 
-public class users {
+public class users implements Initializable {
 
     @FXML
     private TextField fd_fname;
@@ -33,32 +35,42 @@ public class users {
     private TextField fd_fname1;
     @FXML
     private DatePicker fd_date;
+    @FXML
+    private ChoiceBox atype;
+
+    ObservableList<String> typelist= FXCollections.observableArrayList("STUDENT","FACULTY","ADMIN");
 
     @FXML
     void fd_register(MouseEvent event) throws SQLException, IOException {
-        String username, password, fname, lname,typee;
+        String username, password, fname, lname;
         DatePicker dob= new DatePicker();
         password = fd_pass.getText();
         username = fd_user.getText();
         fname = fd_fname.getText();
         lname = fd_lname.getText();
-        typee = fd_fname1.getText();
         LocalDate dobe=dob.getValue();
+    if(!username.isEmpty() ||!password.isEmpty()||!fname.isEmpty()||!lname.isEmpty()) {
+    Connection connection = sqliteConnection.dbConnector();
+    Statement statement = connection.createStatement();
 
-        Connection connection= sqliteConnection.dbConnector();
-        Statement statement = connection.createStatement();
+    int status = statement.executeUpdate("INSERT INTO users (FName,LName,username,password,dob,type" +
+            ") VALUES ( '" + fname + "','" + lname + "','" + username + "','" + password + "','" + dobe + "','" + atype.getValue() + "')");
 
-        int status = statement.executeUpdate("INSERT INTO users (FName,LName,username,password,dob,type" +
-                ") VALUES ( '"+ fname +"','"+ lname +"','"+ username +"','"+ password +"','"+ dobe +"','"+ typee +"')");
-
-        if (status==1) {
-            Alert alert =new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("User Registration");
-            alert.setHeaderText(null);
-            alert.setContentText("User have been Registered Succesfuly!");
-            alert.showAndWait();
-        }
-
+    if (status == 1) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("User Registration");
+        alert.setHeaderText(null);
+        alert.setContentText("User have been Registered Succesfuly!");
+        alert.showAndWait();
+    }
+}
+else{
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    alert.setTitle("User Registration");
+    alert.setHeaderText(null);
+    alert.setContentText("Fill All the Fields! :(");
+    alert.showAndWait();
+}
 
     }
     @FXML
@@ -150,4 +162,9 @@ public class users {
 
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        atype.setValue("STUDENT");
+        atype.setItems(typelist);
+    }
 }

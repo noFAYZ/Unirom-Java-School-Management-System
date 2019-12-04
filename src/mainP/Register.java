@@ -15,6 +15,7 @@ import utilities.sqliteConnection;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
@@ -43,24 +44,33 @@ public class Register {
 
         Connection connection= sqliteConnection.dbConnector();
         Statement statement = connection.createStatement();
-
-        int status = statement.executeUpdate("INSERT INTO users (FName,LName,username,password,dob,type" +
-                ") VALUES ( '"+ fname +"','"+ lname +"','"+ username +"','"+ password +"','"+ dobe +"','STUDENT')");
-
-        if (status==1) {
-            Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
-            Node node = (Node) event.getSource();
-            Stage stage = (Stage) node.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            Alert alert =new Alert(Alert.AlertType.INFORMATION);
+        ResultSet resultSet = statement.executeQuery("select * from users where username = '" + username + "'");
+        if (resultSet.next()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("User Registration");
             alert.setHeaderText(null);
-            alert.setContentText("User have been Registered Succesfuly!");
+            alert.setContentText("User Already exist!");
             alert.showAndWait();
-
         }
 
+        else {
+            int status = statement.executeUpdate("INSERT INTO users (FName,LName,username,password,dob,type" +
+                    ") VALUES ( '" + fname + "','" + lname + "','" + username + "','" + password + "','" + dobe + "','STUDENT')");
 
+            if (status == 1) {
+                Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+                Node node = (Node) event.getSource();
+                Stage stage = (Stage) node.getScene().getWindow();
+                stage.setScene(new Scene(root));
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("User Registration");
+                alert.setHeaderText(null);
+                alert.setContentText("User have been Registered Succesfuly!");
+                alert.showAndWait();
+
+            }
+
+        }
     }
 
 

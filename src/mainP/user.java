@@ -20,7 +20,7 @@ public class user {
     String user,pass,fname,lname,address,typee,gender;
     String dob;
 
-    user(){
+    public user(){
         user=" ";
         pass=" ";
         fname=" ";

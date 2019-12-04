@@ -203,16 +203,15 @@
             <Glow />
          </effect>
       </Label>
-      <TableView fx:id="tableView" layoutX="151.0" layoutY="180.0" prefHeight="312.0" prefWidth="681.0" stylesheets="@../utilities/table.css">
+      <TableView fx:id="tableView" layoutX="151.0" layoutY="180.0" prefHeight="312.0" prefWidth="566.0">
         <columns>
             <TableColumn fx:id="idColumn" prefWidth="85.0" text="ID" />
           <TableColumn fx:id="CNameColumn" prefWidth="157.0" text="Name" />
             <TableColumn fx:id="preReqColumn" prefWidth="151.0" text="Pre Req" />
           <TableColumn fx:id="CHrsColumn" prefWidth="171.0" text="Credit hrs" />
-            <TableColumn prefWidth="116.0" text="Select" />
         </columns>
       </TableView>
-      <Button layoutX="699.0" layoutY="505.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="133.0" text="Register">
+      <Button layoutX="699.0" layoutY="505.0" mnemonicParsing="false" onMouseClicked="#registerCourse" prefHeight="46.0" prefWidth="133.0" text="Register">
          <font>
             <Font size="17.0" />
          </font>

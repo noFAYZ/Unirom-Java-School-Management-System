@@ -2,15 +2,32 @@ package aController;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import mainP.Student;
+import mainP.user;
+import utilities.sqliteConnection;
 
+import java.awt.*;
 import java.io.IOException;
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ResourceBundle;
 
-public class homeview {
+public class homeview implements Initializable {
+
+
+    @FXML
+    private Label namep;
 
 
 
@@ -102,4 +119,21 @@ public class homeview {
         stage.setScene(new Scene(root));
 
     }
-}
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        String fullname= Student.Fname + " " +Student.Lname;
+     namep.setText(fullname);
+    }
+
+    void gethevalues() throws SQLException, IOException {
+
+        Connection connection = sqliteConnection.dbConnector();
+        Statement statement = connection.createStatement();
+
+
+
+    }
+
+
+    }

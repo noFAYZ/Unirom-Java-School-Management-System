@@ -6,12 +6,13 @@ import java.util.Iterator;
 
 public class Student implements person {
 	ArrayList<Course> courses;
-	String id, Fname,Lname,username,type,gender,address;
-	LocalDate dob;
+	public static Integer id;
+	public static String Fname,Lname,username,type,gender,address;
+	public static String dob;
 	Student(){
 		courses=new ArrayList<Course>();
 	}
-	Student(String ids,String fnames,String lnames,String usernames,String types,String genders,LocalDate dobs,String addresss){
+	Student(Integer ids,String fnames,String lnames,String usernames,String types,String genders,String dobs,String addresss){
 		this.id=ids;
 		this.Fname=fnames;
 		this.Lname=lnames;
@@ -29,7 +30,7 @@ public class Student implements person {
 		}
 		
 	}
-	public String getID(){
+	public Integer getID(){
 		
 		return id;
 	}

@@ -10,7 +10,7 @@ public class Course {
 	public Integer id,CHrs,semester;
 	public String CName,ATeacher,type,CCode,preReq;
 
-	Course(){
+	public Course(){
 		students=new ArrayList<Student>();
 		lecturers=new ArrayList<Teacher>();
 	}

@@ -132,7 +132,7 @@
                 </HBox>
             </children>
         </VBox>
-        <Label contentDisplay="CENTER" layoutX="906.0" layoutY="24.0" opacity="0.94" text="STUDENT" textAlignment="CENTER" textFill="#2d2d37">
+        <Label contentDisplay="CENTER" layoutX="906.0" layoutY="24.0" opacity="0.94" text="ADMIN" textAlignment="CENTER" textFill="#2d2d37">
             <font>
                 <Font name="Leelawadee UI Bold" size="22.0" />
             </font>
@@ -178,5 +178,15 @@
             <DropShadow blurType="GAUSSIAN" />
          </effect>
         </HBox>
+      <Label fx:id="namep" layoutX="264.0" layoutY="144.0" text="Label" textFill="WHITE">
+         <font>
+            <Font size="25.0" />
+         </font></Label>
+      <Label layoutX="121.0" layoutY="103.0" text="Welcome," textFill="#2d2d37">
+         <font>
+            <Font name="Gill Sans MT" size="34.0" />
+         </font>
+      </Label>
+      
     </children>
 </AnchorPane>

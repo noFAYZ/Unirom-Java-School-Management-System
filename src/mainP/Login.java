@@ -1,4 +1,5 @@
 package mainP;
+import aController.homeview;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
@@ -41,6 +42,7 @@ ObservableList<String> titlelist= FXCollections.observableArrayList("STUDENT","F
         u1.pass = fd_pass.getText();
         u1.user = fd_user.getText();
 
+
         Connection connection= sqliteConnection.dbConnector();
         Statement statement = connection.createStatement();
 
@@ -49,10 +51,23 @@ if(title.getValue()=="STUDENT"){
     ResultSet resultSet = statement.executeQuery("select * from users where username" +
             " = '" + u1.user + "' and password = '" + u1.pass + "' and type = 'STUDENT'");
         if (resultSet.next()) {
+
+            Student localStudent=new Student();
+            localStudent.username=u1.user;
+            localStudent.id=resultSet.getInt("id");
+            localStudent.Fname=resultSet.getString("FName");
+            localStudent.Lname=resultSet.getString("LName");
+            localStudent.type=resultSet.getString("type");
+            localStudent.address=resultSet.getString("address");
+            localStudent.dob=resultSet.getString("dob");
+            localStudent.gender=resultSet.getString("gender");
+
+
             Parent root = FXMLLoader.load(getClass().getResource("../sView/homeStudent.fxml"));
             Node node = (Node) event.getSource();
             Stage stage = (Stage) node.getScene().getWindow();
             stage.setScene(new Scene(root));
+
 
         }
         else{
@@ -67,10 +82,21 @@ if(title.getValue()=="STUDENT"){
     ResultSet resultSet = statement.executeQuery("select * from users where username" +
             " = '" + u1.user + "' and password = '" + u1.pass + "' and type = 'ADMIN'");
             if(resultSet.next()) {
+
+                Student localStudent=new Student();
+                localStudent.username=u1.user;
+                localStudent.id=resultSet.getInt("id");
+                localStudent.Fname=resultSet.getString("FName");
+                localStudent.Lname=resultSet.getString("LName");
+                localStudent.type=resultSet.getString("type");
+                localStudent.address=resultSet.getString("address");
+                localStudent.dob=resultSet.getString("dob");
+                localStudent.gender=resultSet.getString("gender");
                 Parent root = FXMLLoader.load(getClass().getResource("../aView/homeAdmin.fxml"));
                 Node node = (Node) event.getSource();
                 Stage stage = (Stage) node.getScene().getWindow();
                 stage.setScene(new Scene(root));
+
             }
             else{
                 Alert alert =new Alert(Alert.AlertType.INFORMATION);
@@ -85,6 +111,17 @@ else if (title.getValue()=="FACULTY") {
     ResultSet resultSet = statement.executeQuery("select * from users where username" +
             " = '" + u1.user + "' and password = '" + u1.pass + "' and type = 'FACULTY'");
     if(resultSet.next()) {
+
+        Student localStudent=new Student();
+        localStudent.username=u1.user;
+        localStudent.id=resultSet.getInt("id");
+        localStudent.Fname=resultSet.getString("FName");
+        localStudent.Lname=resultSet.getString("LName");
+        localStudent.type=resultSet.getString("type");
+        localStudent.address=resultSet.getString("address");
+        localStudent.dob=resultSet.getString("dob");
+        localStudent.gender=resultSet.getString("gender");
+
         Parent root = FXMLLoader.load(getClass().getResource("../fView/homeFaculty.fxml"));
         Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
